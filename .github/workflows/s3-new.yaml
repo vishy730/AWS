@@ -1,1 +1,28 @@
+name: Sync with S3
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name if it's different
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Sync with S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AKIAYQYUBFI3XKKUI6GB}}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.4edw0RpY6lrx4Txgs1gklCcqdcSdzt2VhnfImhe6}}
+          AWS_DEFAULT_REGION: us-east-1  # Replace with your AWS region
+        run: |
+          aws s3 sync . vishnuproject
 
